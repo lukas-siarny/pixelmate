@@ -1,0 +1,82 @@
+@import "../../globalStyles/globalStyles.scss";
+
+@keyframes navBackgroundAnimation {
+  0% {
+    background-color: transparent;
+    transform: translateY(50vh);
+  }
+  100% {
+    background: rgba(0, 0, 0, 0.6);
+    transform: translateY(0);
+  }
+}
+
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: none;
+  background: transparent;
+  overflow-y: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 999;
+
+  &.is-login {
+    z-index: 10;
+  }
+
+  &__wrapper {
+    opacity: 0;
+    margin: auto;
+    position: relative;
+    padding: 5rem 0.9375rem 0.9375rem 0.9375rem;
+
+    @media (min-width: $sm) {
+      padding: 5rem 3.75rem 3.75rem 3.75rem;
+    }
+  }
+
+  &__element {
+    width: 100%;
+    max-width: 42rem;
+    min-width: 20rem;
+    padding: 3rem;
+    background: #fff;
+    border-radius: 6px;
+    position: relative;
+  }
+
+  &__btn-close {
+    background: transparent;
+    border: none;
+    padding: 0;
+    margin: 0;
+    width: 3rem;
+    height: 3rem;
+    position: absolute;
+    right: 0.9375rem;
+    top: 0.9375rem;
+    cursor: pointer;
+  }
+
+  &__title {
+    font-weight: 700;
+    font-size: 1.5rem;
+    line-height: 2.125rem;
+    margin-bottom: 1.5rem;
+    text-align: center;
+  }
+}
+
+.modal.is-open {
+  display: flex;
+  animation: navBackgroundAnimation 250ms ease-in-out forwards;
+
+  & .modal__wrapper {
+    @include animationSlideUp(750ms, 0s, 3rem);
+  }
+}

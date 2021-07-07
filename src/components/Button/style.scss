@@ -1,0 +1,63 @@
+@import "../../globalStyles/globalStyles.scss";
+
+@keyframes arrowAnimation {
+  0% {
+    transform: translateX(0);
+  }
+  30% {
+    transform: translateX(1rem);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+.button {
+  border-top-left-radius: 999px;
+  border-top-right-radius: 999px;
+  border-bottom-right-radius: 999px;
+  border: 1px solid;
+  cursor: pointer;
+  padding: 1.5rem 3rem;
+  font-size: 1rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  transition: 250ms ease-in-out;
+  min-width: 13.5rem;
+
+  &:hover > .button__arrow-primary,
+  &:hover > .button__arrow-secondary {
+    animation: arrowAnimation 500ms ease-in-out 1;
+  }
+
+  &--primary {
+    color: #fff;
+    background: $colorPrimary;
+    border: none;
+
+    &:hover,
+    &:focus {
+      background: darken($colorPrimary, 10%);
+    }
+  }
+
+  &--secondary {
+    color: $colorPrimary;
+    background: transparent;
+    border: 1px solid $colorPrimary;
+  }
+
+  &--fullwidth {
+    width: 100%;
+  }
+
+  &__arrow-primary {
+    margin-left: 1rem;
+    transition: 250ms ease-in-out;
+  }
+
+  &__arrow-secondary {
+    margin-left: 0.25rem;
+    transition: 250ms ease-in-out;
+  }
+}

@@ -1,0 +1,35 @@
+@import "../../globalStyles/globalStyles.scss";
+
+@keyframes arrowAnimation-btnback {
+  0% {
+    transform: translateX(0) rotate(180deg);
+  }
+  30% {
+    transform: translateX(-0.75rem) rotate(180deg);
+  }
+  100% {
+    transform: translateX(0) rotate(180deg);
+  }
+}
+
+.button-back {
+  cursor: pointer;
+  padding: 1rem 2rem;
+  font-size: 1rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  transition: 250ms ease-in-out;
+  border-radius: 999px;
+  font-size: 1rem;
+  background: $colorPrimaryLight;
+  color: $colorPrimary;
+  border: none;
+
+  &__arrow {
+    transform: rotate(180deg);
+  }
+
+  &:hover > .button-back__arrow {
+    animation: arrowAnimation-btnback 500ms ease-in-out 1;
+  }
+}

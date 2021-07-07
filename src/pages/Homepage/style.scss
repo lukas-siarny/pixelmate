@@ -1,0 +1,271 @@
+@import "../../globalStyles/globalStyles.scss";
+
+.header {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  background: url("./images/header.png") no-repeat center center;
+  background-size: cover;
+
+  @media (min-width: $md) {
+    min-height: 775px;
+  }
+
+  &__wrapper {
+    margin-top: auto;
+    margin-bottom: auto;
+    height: 100%;
+    padding-top: 30px;
+    display: flex;
+    align-items: center;
+  }
+
+  &__left {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+
+    @media (min-width: $md) {
+      text-align: left;
+      align-items: flex-start;
+    }
+  }
+
+  &__title {
+    font-size: 2rem;
+    line-height: 1.33;
+    font-weight: 900;
+    color: #fff;
+    opacity: 0;
+
+    @media (min-width: $sm) {
+      font-size: 3rem;
+    }
+
+    @media (min-width: $md) {
+      font-size: 3.75rem;
+    }
+  }
+
+  &__text {
+    color: $colorGray;
+    font-weight: 700;
+    font-size: 1.125rem;
+    padding: 2em 0 3em 0;
+    line-height: 1.5;
+    opacity: 0;
+  }
+
+  &__contact-btn {
+    opacity: 0;
+  }
+
+  &__login-wrapper {
+    display: none;
+    opacity: 0;
+
+    @media (min-width: $md) {
+      display: block;
+    }
+  }
+}
+
+.login {
+  width: 100%;
+  max-width: 42rem;
+  padding: 2rem;
+  background: #fff;
+  border-radius: 6px;
+
+  @media (min-width: $md) {
+    min-width: 21rem;
+  }
+
+  &__title {
+    font-size: 1.5rem;
+    line-height: 2rem;
+    margin-bottom: 1.5rem;
+  }
+
+  &__textinput-wrapper {
+    &:not(:last-of-type) {
+      margin-bottom: 1.25rem;
+    }
+  }
+
+  &__checkboxinput-wrapper {
+    margin: 1.5rem 0 2rem 0;
+  }
+}
+
+.clients {
+  width: 100%;
+  transform: translateY(-5.1875rem);
+
+  &__grid {
+    display: flex;
+    align-items: center;
+    min-height: 8.5rem;
+    box-shadow: 0px 4px 35px #0000001f;
+    background: #fff;
+    overflow-x: auto;
+    overflow-y: hidden;
+
+    @media (min-width: $sm) {
+      flex-wrap: wrap;
+      justify-content: space-around;
+      overflow-x: initial;
+    }
+
+    & > * {
+      flex: 0 0 auto;
+      margin: 0 1rem;
+      opacity: 0;
+    }
+  }
+}
+
+.aboutus {
+  &__wrapper {
+    margin: -2rem;
+    padding: 0 0 5.75rem 0;
+    position: relative;
+
+    @media (min-width: $md) {
+      margin: 0;
+      padding: 7.5rem 0 5.75rem 0;
+    }
+  }
+
+  &__image {
+    display: none;
+
+    @media (min-width: $md) {
+      position: absolute;
+      min-width: 37rem;
+      display: block;
+      height: auto;
+      width: 50%;
+      right: 0;
+      top: 0;
+      z-index: -1;
+      opacity: 0;
+
+      &.in-view {
+        @include animationSlideUp(1000ms, 0ms, 3rem);
+      }
+    }
+
+    @media (min-width: $lg) {
+      top: 0.5rem;
+      right: 4%;
+    }
+  }
+
+  &__title {
+    font-size: 2.5rem;
+    line-height: 1.333;
+    margin: 1rem 0 0 0;
+    font-weight: 900;
+    opacity: 0;
+
+    @media (min-width: $sm) {
+      font-size: 3rem;
+    }
+
+    @media (min-width: $md) {
+      margin: 1.5rem 0 3rem 0;
+    }
+
+    &.in-view {
+      @include animationSlideUp(500ms, 250ms, 3rem);
+    }
+  }
+
+  &__subtitle {
+    display: inline-block;
+    color: $colorPrimary;
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: 1rem;
+    line-height: 1.2;
+    opacity: 0;
+
+    &.in-view {
+      @include animationSlideUp(500ms, 0ms, 3rem);
+    }
+  }
+
+  &__text {
+    font-size: 1.125rem;
+    line-height: 1.5;
+    margin-bottom: 3rem;
+  }
+
+  &__text-left {
+    opacity: 0;
+
+    &.in-view {
+      @include animationSlideUp(500ms, 0ms, 3rem);
+    }
+  }
+
+  &__text-right {
+    opacity: 0;
+
+    &.in-view {
+      @include animationSlideUp(500ms, 0ms, 3rem);
+
+      @media (min-width: $md) {
+        @include animationSlideUp(500ms, 250ms, 3rem);
+      }
+    }
+  }
+
+  &__btn-wrapper {
+    opacity: 0;
+
+    &.in-view {
+      @include animationSlideUp(500ms, 0ms, 3rem);
+    }
+  }
+}
+
+.header.in-view {
+  & .header__title {
+    @include animationSlideUp(500ms, 0ms, 3rem);
+  }
+  & .header__text {
+    @include animationSlideUp(500ms, 250ms, 3rem);
+  }
+  & .header__contact-btn {
+    @include animationSlideUp(500ms, 500ms, 3rem);
+  }
+
+  & .header__login-wrapper {
+    @include animationSlideUp(1000ms, 0ms, 3rem);
+  }
+}
+
+.clients.in-view {
+  & .clients__client:first-of-type {
+    @include animationSlideUp(500ms, 1000ms, 2rem);
+  }
+
+  & .clients__client:nth-of-type(2) {
+    @include animationSlideUp(500ms, 1250ms, 2rem);
+  }
+
+  & .clients__client:nth-of-type(3) {
+    @include animationSlideUp(500ms, 1500ms, 2rem);
+  }
+
+  & .clients__client:nth-of-type(4) {
+    @include animationSlideUp(500ms, 1750ms, 2rem);
+  }
+  & .clients__client:nth-of-type(5) {
+    @include animationSlideUp(500ms, 2000ms, 2rem);
+  }
+}

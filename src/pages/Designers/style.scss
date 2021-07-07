@@ -1,0 +1,148 @@
+@import "../../globalStyles/globalStyles.scss";
+
+.designers-header {
+  width: 100%;
+  height: 12rem;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+
+  @media (min-width: $md) {
+    height: 15.75rem;
+  }
+}
+
+.searchbar {
+  transform: translateY(50%);
+
+  &__element {
+    display: flex;
+    width: 100%;
+    height: 7.5rem;
+    padding: 1.875rem;
+    background: #fff;
+    box-shadow: 0px 4px 35px #0000001f;
+  }
+
+  &__input-wrapper {
+    flex: 1;
+    position: relative;
+    margin-right: 1.5rem;
+  }
+
+  &__input {
+    width: 100%;
+    height: 100%;
+    border: 1px solid #e0e0e5;
+    padding-left: 3.75rem;
+    outline: none;
+    transition: 250ms ease-in-out;
+    color: $colorGray;
+    font-size: 1.125rem;
+    font-weight: 500;
+    line-height: 1.375rem;
+
+    &::placeholder {
+      color: $colorGray;
+      font-size: 1.125rem;
+      font-weight: 500;
+    }
+
+    &:-webkit-autofill {
+      border: 1px solid #e0e0e5;
+      -webkit-box-shadow: 0 0 0px 1000px #fff inset;
+      transition: background-color 5000s ease-in-out 0s;
+    }
+
+    &:-webkit-autofill::first-line {
+      font-family: "Montserrat", sans-serif;
+      font-size: 0.875rem;
+      color: $colorGray;
+      font-weight: 500;
+    }
+
+    &:focus {
+      border-color: $colorGray;
+    }
+  }
+
+  &__icon {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    left: 1.5rem;
+  }
+}
+
+.designers-main {
+  width: 100%;
+  background: transparent
+    linear-gradient(165deg, $colorPrimaryLight 0%, $colorPrimaryLight 100%) 0%
+    0% no-repeat padding-box;
+
+  &__wrapper {
+    padding: 6.5rem 0;
+
+    @media (min-width: $md) {
+      padding: 8.5rem 0;
+    }
+  }
+}
+
+.designer {
+  word-break: break-all;
+  height: 100%;
+  margin-bottom: 0.9375rem;
+  background: #fff;
+  border-top-left-radius: 1.5rem;
+  border-top-right-radius: 1.5rem;
+  border-bottom-right-radius: 1.5rem;
+  padding: 1.875rem 1.875rem 3.75rem 1.875rem;
+  box-shadow: 0px 20px 70px #16181c1a;
+  font-size: 1.25rem;
+  line-height: 1.5;
+  font-weight: 500;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transform: translateY(3rem);
+  opacity: 0;
+
+  &.in-view {
+    @include animationSlideUp(500ms, 0ms, 3rem);
+  }
+
+  &__info {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  &__username {
+    color: #140f29;
+  }
+
+  &__name {
+    color: #140f29;
+    font-size: 1.875rem;
+    line-height: 2.125rem;
+    font-weight: 700;
+    margin: 0.75rem 0;
+  }
+
+  &__email {
+    color: $colorGray;
+    margin-bottom: 2rem;
+    display: inline-block;
+  }
+
+  &__link {
+    display: inline-block;
+    margin: 2rem auto;
+    color: #1232f9;
+  }
+
+  &__btn-wrapper {
+    align-self: center;
+  }
+}
