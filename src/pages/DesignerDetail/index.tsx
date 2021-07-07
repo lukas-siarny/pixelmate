@@ -9,6 +9,7 @@ import DesignerImage from "./imges/designer.png";
 import { useInView } from "react-intersection-observer";
 import SkeletonDesignerDetail from "../../components/SkeletonLoading/SkeletonDesignerDetail";
 import SkeletonElement from "../../components/SkeletonLoading/SkeletonElement";
+import NotFound from "../../components/NotFound";
 
 const DesignerDetail: React.FC = () => {
   const [designer, setDesigner] = React.useState<Designer | null>(null);
@@ -59,53 +60,62 @@ const DesignerDetail: React.FC = () => {
               onBtnClick={() => history.push("/designers")}
             />
           </div>
-          {status === Status.FULFILLED && designer && (
-            <div className="designer-detail__info">
-              <span className="designer-detail__username">
-                {designer.username}
-              </span>
-              <h3 className="designer-detail__name">{designer.name}</h3>
-              <span className="designer-detail__email">{designer.email}</span>
-              <div className="designer-detail__address-wrapper">
-                <Address address={designer.address} />
+          {status === Status.FULFILLED &&
+            designer &&
+            Object.keys(designer).length > 0 && (
+              <div className="designer-detail__info">
+                <span className="designer-detail__username">
+                  {designer.username}
+                </span>
+                <h3 className="designer-detail__name">{designer.name}</h3>
+                <span className="designer-detail__email">{designer.email}</span>
+                <div className="designer-detail__address-wrapper">
+                  <Address address={designer.address} />
+                </div>
+                <a
+                  href={designer.website}
+                  target="_blank"
+                  rel="nofollow noreferrer noopener"
+                  className="designer-detail__link"
+                >
+                  {designer.website}
+                </a>
+                <div className="designer-detail__text">
+                  <strong>Pixelmate s.r.o.</strong>
+                  <p>
+                    Pellentesque habitant morbi tristique senectus et netus
+                    malesuada.
+                  </p>
+                </div>
               </div>
-              <a
-                href={designer.website}
-                target="_blank"
-                rel="nofollow noreferrer noopener"
-                className="designer-detail__link"
-              >
-                {designer.website}
-              </a>
-              <div className="designer-detail__text">
-                <strong>Pixelmate s.r.o.</strong>
-                <p>
-                  Pellentesque habitant morbi tristique senectus et netus
-                  malesuada.
-                </p>
-              </div>
-            </div>
-          )}
+            )}
           {status === Status.LOADING && <SkeletonDesignerDetail />}
         </div>
 
         <div className="col col-12 col-6-md col-5-ld designer-detail__col-right`">
-          {status === Status.FULFILLED && designer && (
-            <img
-              ref={imageRef}
-              src={DesignerImage}
-              alt={designer?.name}
-              className={`designer-detail__picture ${
-                imageInView ? "in-view" : ""
-              }`}
-            />
-          )}
+          {status === Status.FULFILLED &&
+            designer &&
+            Object.keys(designer).length > 0 && (
+              <img
+                ref={imageRef}
+                src={DesignerImage}
+                alt={designer?.name}
+                className={`designer-detail__picture ${
+                  imageInView ? "in-view" : ""
+                }`}
+              />
+            )}
           {status === Status.LOADING && (
             <div className="designer-detail__skeleton">
               <SkeletonElement type="picture" />
             </div>
           )}
         </div>
+        {status === Status.FULFILLED &&
+          designer &&
+          Object.keys(designer).length === 0 && (
+            <NotFound text="Požadovaný designer nebol nájdený" />
+          )}
       </main>
     </>
   );

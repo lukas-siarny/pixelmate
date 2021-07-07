@@ -7,7 +7,11 @@ import "./style.scss";
 
 const Deigners: React.FC = () => {
   const [designers, setDesigners] = React.useState<Designer[] | []>([]);
+  const [designersSearch, setDesignersSearch] = React.useState<Designer[] | []>(
+    []
+  );
   const [status, setStatus] = React.useState(Status.IDLE);
+  const [searchIsActive, setSearchIsActive] = React.useState(false);
 
   React.useEffect(() => {
     (async () => {
@@ -36,20 +40,23 @@ const Deigners: React.FC = () => {
 
       return;
     });
-
-    if (filteredDesigners.length === 0) {
-      setStatus(Status.NOT_FOUND);
-      return;
-    }
-
-    setDesigners(filteredDesigners);
+    setDesignersSearch(filteredDesigners);
   };
 
   return (
     <>
       <Topbar dark={false} />
-      <Header setSearchResults={setSearchResults} />
-      <Main designers={designers} status={status} />
+      <Header
+        setSearchResults={setSearchResults}
+        handleSearchStatus={(isAcitve: boolean) => setSearchIsActive(isAcitve)}
+        searchIsActive={searchIsActive}
+      />
+      <Main
+        designers={designers}
+        designersSearch={designersSearch}
+        searchIsActive={searchIsActive}
+        status={status}
+      />
     </>
   );
 };

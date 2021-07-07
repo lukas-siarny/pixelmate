@@ -27,7 +27,6 @@
   &__input-wrapper {
     flex: 1;
     position: relative;
-    margin-right: 1.5rem;
   }
 
   &__input {
@@ -72,10 +71,20 @@
     transform: translateY(-50%);
     left: 1.5rem;
   }
+
+  &__btn-wrapper {
+    display: none;
+
+    @media (min-width: $sm) {
+      display: block;
+      margin-left: 1.5rem;
+    }
+  }
 }
 
 .designers-main {
   width: 100%;
+  min-height: calc(100vh - 24.5rem);
   background: transparent
     linear-gradient(165deg, $colorPrimaryLight 0%, $colorPrimaryLight 100%) 0%
     0% no-repeat padding-box;

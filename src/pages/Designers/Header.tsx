@@ -2,13 +2,52 @@ import React from "react";
 import Button from "../../components/Button";
 import "./style.scss";
 import { ReactComponent as SearchIcon } from "../../assets/search-icon.svg";
+import { useHistory, useLocation } from "react-router-dom";
 
 type Props = {
   setSearchResults: (value: string) => void;
+  handleSearchStatus: (isAcitve: boolean) => void;
+  searchIsActive: boolean;
 };
 
-const DesignersHeader: React.FC<Props> = ({ setSearchResults }) => {
+const DesignersHeader: React.FC<Props> = ({
+  setSearchResults,
+  handleSearchStatus,
+  searchIsActive,
+}) => {
   const [searchValue, setSearchValue] = React.useState("");
+  const history = useHistory();
+  const location = useLocation();
+
+  const handleSearch = () => {
+    const searchParams = new URLSearchParams(location.search);
+    searchParams.set("search", searchValue);
+
+    history.push({
+      pathname: location.pathname,
+      search: searchParams.toString(),
+    });
+
+    if (searchValue === "" && searchIsActive) {
+      handleSearchStatus(false);
+      return;
+    }
+    setSearchResults(searchValue);
+    handleSearchStatus(true);
+  };
+
+  React.useEffect(() => {
+    const handleKeyPress = (e: KeyboardEvent) => {
+      if (e.key === "Enter") {
+        handleSearch();
+      }
+    };
+    document.addEventListener("keydown", handleKeyPress);
+
+    return () => {
+      document.removeEventListener("keydown", handleKeyPress);
+    };
+  }, [handleSearch]);
 
   return (
     <>
@@ -26,16 +65,13 @@ const DesignersHeader: React.FC<Props> = ({ setSearchResults }) => {
                   onChange={(e) => setSearchValue(e.target.value)}
                 />
               </div>
-              <Button
-                text="Vyhledat"
-                onBtnClick={() => {
-                  if (searchValue === "") {
-                    return;
-                  }
-                  setSearchResults(searchValue);
-                }}
-                icon={false}
-              />
+              <div className="searchbar__btn-wrapper">
+                <Button
+                  text="Vyhledat"
+                  onBtnClick={handleSearch}
+                  icon={false}
+                />
+              </div>
             </div>
           </div>
         </div>
